@@ -2,12 +2,14 @@
 //  CalculatorViewController.h
 //  Calculator
 //
-//  Created by vaibhav patel on 9/2/12.
-//  Copyright (c) 2012 vaibhav patel Inc. All rights reserved.
+//  Created by vaibhav patel on 8/31/12.
+//  Copyright (c) 2012 vaibhav patel inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
 @interface CalculatorViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UILabel *display;
+@property (weak, nonatomic) IBOutlet UILabel *historyDisplay;
 
 @end
