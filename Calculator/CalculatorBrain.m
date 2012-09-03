@@ -210,7 +210,71 @@
     return result;
 }
 
+//Assignment 2 Part 2
++(NSString *)descriptionOfProgram:(id)program
+{
 
+    NSMutableArray *stack;
+    
+    if([program isKindOfClass:[NSArray class]])
+    {
+        //convert program to mutableArray
+        stack = [program mutableCopy];
+        return [CalculatorBrain programFormatter:stack];
+    }
+    return nil;
+}
+
+//Assignment 2 Part 2
++(NSString *)programFormatter:(NSMutableArray *)stack
+{
+    //Create sets of different kinds of operations.
+    NSSet *twoOperandOperations = [[NSSet alloc]initWithArray:[NSArray arrayWithObjects: @"+", @"-", @"*", @"/", nil]];
+    NSSet *oneOperandOperations = [[NSSet alloc]initWithArray:[NSArray arrayWithObjects: @"sin", @"cos", @"sqrt", @"log", nil]];
+    NSSet *noOperandOperations = [[NSSet alloc]initWithArray:[NSArray arrayWithObjects: @"pie", @"exp", nil]];
+    NSSet *variables = [[NSSet alloc]initWithArray:[NSArray arrayWithObjects: @"x", @"a", @"b", nil]];
+    
+    NSString *result;
+        
+        //pop last element of the array
+        id topOfStack = [stack lastObject];
+        
+        if(topOfStack)[stack removeLastObject];
+        
+        //if element is number return number
+        if([topOfStack isKindOfClass:[NSNumber class]])
+            return [topOfStack stringValue];
+        
+        if([topOfStack isKindOfClass:[NSString class]])
+        {
+            //format string as per kind of operation
+            if([twoOperandOperations containsObject:topOfStack])
+            {
+                NSString *operator = topOfStack;
+                NSString *operand1 = [[CalculatorBrain programFormatter:stack] stringByAppendingString:@" )"];
+                NSString *operand2 = [@"( " stringByAppendingString:[CalculatorBrain programFormatter:stack]];
+                result = [[operand2 stringByAppendingString:operator]stringByAppendingString:operand1];
+            }
+            else if([oneOperandOperations containsObject:topOfStack])
+            {
+                NSString *operator = topOfStack;
+                NSString *operand1 = [@"( " stringByAppendingString:[CalculatorBrain programFormatter:stack]];
+                operand1 = [operand1 stringByAppendingString:@" )"];
+                result = [operator stringByAppendingString:operand1];
+            }
+            else if([noOperandOperations containsObject:topOfStack])
+            {
+                NSString *operator = topOfStack;
+                result = operator;
+            }
+            else if([variables containsObject:topOfStack])
+            {
+                result = topOfStack;
+            }
+            return result;
+        }
+        return nil;
+}
 
 
 -(void)clearStack

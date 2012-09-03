@@ -41,18 +41,22 @@
     }
 }
 
+//Assignment 2: Part 2
+//call model's description of program everytime operator is pressed.
 - (IBAction)operatorPressed:(UIButton *)sender {
     
-    [self updateHistory: sender.currentTitle];
+    //[self updateHistory: sender.currentTitle];
     double result = [self.brain performOperation:sender.currentTitle];
     self.display.text = [NSString stringWithFormat:@"%g",result];
-    
+    self.historyDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
 }
 
+//Assignment 2: Part 2
+//no need to updateHistory when enter is pressed anymore.
 - (IBAction)enterPressed {
     
-    [self updateHistory:self.display.text];
-    [self updateHistory: @"Enter"];
+    //[self updateHistory:self.display.text];
+    //[self updateHistory: @"Enter"];
     [self.brain pushOperand:[self.display.text doubleValue]];
     self.userIsInTheMiddleOfEnteringNumber = NO;
     
