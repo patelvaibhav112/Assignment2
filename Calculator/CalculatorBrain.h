@@ -12,5 +12,9 @@
 
 - (void)pushOperand:(double)operand;
 - (double)performOperation:(NSString *)operation;
+- (void)clearStack;
+
+@property (readonly)id program;
++(double) runProgram: (id)program;
 
 @end
