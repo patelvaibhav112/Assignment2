@@ -24,4 +24,7 @@
 
 //Assignment 2 Part 2
 +(NSString *)descriptionOfProgram: (id)program;
+
+//Assignment 3 Part 3
+-(void)pushVariable:(NSString *)variable;
 @end

@@ -26,6 +26,12 @@
 {
     [self.programStack addObject:[NSNumber numberWithDouble:operand]];
 }
+//Assignment 2: Part 3
+//Adding a new method to push variable in the stack
+- (void)pushVariable:(NSString *)variable
+{
+    [self.programStack addObject:variable];
+}
 
 - (id)program
 {
