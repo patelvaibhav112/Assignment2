@@ -289,4 +289,9 @@
     
 }
 
+//Assignment 2 Part 4
+-(void)removeLastObjectFromStack
+{
+    [self.programStack removeLastObject];
+}
 @end

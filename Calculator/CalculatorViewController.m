@@ -115,6 +115,38 @@
 }
 
 
+//Assignment 2 Part 4
+- (IBAction)undoPressed
+{
+ 
+    //if user is in middle of entering number, delete the last digit entered
+    if(self.userIsInTheMiddleOfEnteringNumber)
+    {
+        //if there is no more digits to delete while useris in middle of entering number
+        NSString *currentDisplayContent = self.display.text;
+        
+        if ( [currentDisplayContent length] > 0)
+            self.display.text = [currentDisplayContent substringToIndex:[currentDisplayContent length] - 1];
+        
+        //the user is not in middle of entering a number anymore
+        else
+            self.userIsInTheMiddleOfEnteringNumber = NO;
+        
+    }
+    //if user is not in middle of entering number, remove the last item from the model
+    else
+    {
+        //remove the last item from model
+        [self.brain removeLastObjectFromStack];
+        //the user is not in middle of entering a number anymore
+        //run the program on model and update display
+        double result = [CalculatorBrain runProgram:self.brain.program usingVariableValues:self.testVariableValues];
+        self.display.text = [NSString stringWithFormat:@"%g",result];
+        self.historyDisplay.text = [CalculatorBrain descriptionOfProgram:self.brain.program];
+        
+    }
+}
+
 //Assignment 1: Part 2.
 - (IBAction)decimalPressed {
     
